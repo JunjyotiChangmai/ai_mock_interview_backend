@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Form
-from app.models.model import requestFormData, responseFormData,QnA
+from app.models.model import requestFormData, responseFormData,QnA,QuestionRequest
+from app.services.question_generator import generate_questions
 from app.services import db
 
 router = APIRouter()
@@ -22,3 +23,13 @@ def name(student:QnA):
 @router.get("/test")
 def test():
     return db.view()
+
+# question generator api (working)
+@router.post("/generate-questions")
+async def generate(request: QuestionRequest):
+    questions = generate_questions(
+        role=request.role,
+        skills=request.skills,
+        experience=request.experience
+    )
+    return {"questions": questions}

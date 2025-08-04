@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import List, Optional
 
 class requestFormData(BaseModel):
     name: str
@@ -18,3 +19,9 @@ class Base(BaseModel):
 class QnA(BaseModel):
     # sid:int
     inputs:list[Base]   
+
+# for question generation
+class QuestionRequest(BaseModel):
+    role: str
+    skills: List[str]
+    experience: Optional[int] = 0    
