@@ -18,7 +18,8 @@ class Base(BaseModel):
 
 class QnA(BaseModel):
     # sid:int
-    inputs:list[Base]   
+    inputs:list[Base]
+    session_id: Optional[str] = None  
 
 # for question generation
 class QuestionRequest(BaseModel):
